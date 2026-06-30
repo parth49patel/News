@@ -6,17 +6,21 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		51D47D4C2FF352CE006D8E01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51D47D482FF352CE006D8E01 /* Assets.xcassets */; };
+		51D47D4D2FF352CE006D8E01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D492FF352CE006D8E01 /* ContentView.swift */; };
+		51D47D4E2FF352CE006D8E01 /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D4A2FF352CE006D8E01 /* NewsApp.swift */; };
+		51D47D542FF36615006D8E01 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D532FF36612006D8E01 /* Config.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		51D47D382FF34C1A006D8E01 /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		51D47D482FF352CE006D8E01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51D47D492FF352CE006D8E01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		51D47D4A2FF352CE006D8E01 /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
+		51D47D532FF36612006D8E01 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		51D47D552FF3661A006D8E01 /* Config.example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.example.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		51D47D3A2FF34C1A006D8E01 /* News */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = News;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		51D47D352FF34C1A006D8E01 /* Frameworks */ = {
@@ -32,7 +36,7 @@
 		51D47D2F2FF34C1A006D8E01 = {
 			isa = PBXGroup;
 			children = (
-				51D47D3A2FF34C1A006D8E01 /* News */,
+				51D47D4B2FF352CE006D8E01 /* News */,
 				51D47D392FF34C1A006D8E01 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +47,50 @@
 				51D47D382FF34C1A006D8E01 /* News.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		51D47D4B2FF352CE006D8E01 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				51D47D552FF3661A006D8E01 /* Config.example.swift */,
+				51D47D532FF36612006D8E01 /* Config.swift */,
+				51D47D512FF35302006D8E01 /* Models */,
+				51D47D4F2FF352F4006D8E01 /* Features */,
+				51D47D502FF352FA006D8E01 /* Core */,
+				51D47D522FF363B9006D8E01 /* Shared */,
+				51D47D482FF352CE006D8E01 /* Assets.xcassets */,
+				51D47D492FF352CE006D8E01 /* ContentView.swift */,
+				51D47D4A2FF352CE006D8E01 /* NewsApp.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		51D47D4F2FF352F4006D8E01 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		51D47D502FF352FA006D8E01 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		51D47D512FF35302006D8E01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		51D47D522FF363B9006D8E01 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,9 +107,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				51D47D3A2FF34C1A006D8E01 /* News */,
 			);
 			name = News;
 			packageProductDependencies = (
@@ -109,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D47D4C2FF352CE006D8E01 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +165,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D47D4D2FF352CE006D8E01 /* ContentView.swift in Sources */,
+				51D47D4E2FF352CE006D8E01 /* NewsApp.swift in Sources */,
+				51D47D542FF36615006D8E01 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +305,8 @@
 				DEVELOPMENT_TEAM = ARY55MH724;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = News;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +339,8 @@
 				DEVELOPMENT_TEAM = ARY55MH724;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = News;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
