@@ -10,9 +10,13 @@ import SwiftData
 
 @main
 struct NewsApp: App {
+	
+	@State private var networkMonitor = NetworkMonitor.shared
+	
     var body: some Scene {
         WindowGroup {
             ContentView()
+				.environment(networkMonitor)
         }
 		.modelContainer(for: CachedArticle.self)
     }
