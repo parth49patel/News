@@ -18,6 +18,6 @@ struct NewsApp: App {
             ContentView()
 				.environment(networkMonitor)
         }
-		.modelContainer(for: CachedArticle.self)
+		.modelContainer(for: [CachedArticle.self, BookmarkedArticle.self])
     }
 }

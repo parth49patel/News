@@ -72,7 +72,7 @@ struct HeadlinesView: View {
 			await vm.refresh(context: context)
 		}
 		.navigationDestination(for: Article.self) { article in
-			//ArticleDetailView(article: article)
+			ArticleDetailView(article: article)
 		}
 	}
 	
