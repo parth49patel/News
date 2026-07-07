@@ -31,6 +31,11 @@ struct HeadlinesView: View {
 			.task {
 				await vm.loadHeadlines(context: context)
 			}
+			.onChange(of: monitor.isConnected) { _, isConnected in
+				if isConnected {
+					Task { await vm.loadHeadlines(context: context) }
+				}
+			}
 		}
     }
 	
