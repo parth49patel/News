@@ -9,16 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+		TabView {
+			Tab("Headlines", systemImage: "newspaper") {
+				HeadlinesView()
+			}
+			
+			Tab("Search", systemImage: "magnifyingglass") {
+				SearchView()
+			}
+			
+			Tab("Bookmarks", systemImage: "bookmark") {
+				BookmarksView()
+			}
+			
+			Tab("Settings", systemImage: "gearshape") {
+				SettingsView()
+			}
+		}
     }
 }
 
 #Preview {
     ContentView()
+		.environment(NetworkMonitor.shared)
 }
