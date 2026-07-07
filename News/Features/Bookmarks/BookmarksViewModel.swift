@@ -5,14 +5,19 @@
 //  Created by Parth Patel on 2026-07-06.
 //
 
-import SwiftUI
+import Foundation
+import SwiftData
 
-struct BookmarksViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    BookmarksViewModel()
+@Observable
+final class BookmarksViewModel {
+	
+	func delete(_ article: BookmarkedArticle, context: ModelContext) {
+		context.delete(article)
+		try? context.save()
+	}
+	
+	func deleteAll(context: ModelContext) {
+		try? context.delete(model: BookmarkedArticle.self)
+		try? context.save()
+	}
 }

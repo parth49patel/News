@@ -6,11 +6,65 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BookmarksView: View {
+	
+	@Environment(\.modelContext) private var context
+	@Query(sort: \BookmarkedArticle.bookmarkedAt, order: .reverse) private var bookmarks: [BookmarkedArticle]
+	@State private var vm = BookmarksViewModel()
+	
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+		NavigationStack {
+			Group {
+				if bookmarks.isEmpty {
+					emptyState
+				} else {
+					bookmarksList
+				}
+			}
+			.navigationTitle("Bookmarks")
+			.toolbar {
+				ToolbarItem(placement: .topBarTrailing) {
+					if !bookmarks.isEmpty {
+						Button("Clear All", role: .destructive) {
+							vm.deleteAll(context: context)
+						}
+					}
+				}
+			}
+		}
     }
+	
+	private var bookmarksList: some View {
+		List {
+			ForEach(bookmarks) { bookmark in
+				NavigationLink(value: bookmark.toArticle()) {
+					ArticleCardView(article: bookmark.toArticle())
+				}
+				.listRowSeparator(.hidden)
+				.swipeActions(edge: .trailing, allowsFullSwipe: true) {
+					Button(role: .destructive) {
+						vm.delete(bookmark, context: context)
+					} label: {
+						Label("Delete", systemImage: "trash")
+					}
+				}
+			}
+		}
+		.listStyle(.plain)
+		.navigationDestination(for: Article.self) { article in
+			ArticleDetailView(article: article)
+		}
+	}
+	
+	private var emptyState: some View {
+		EmptyStateView(
+			title: "No Bookmarks Yet",
+			message: "Tap the bookmark icon on any article to save it for later.",
+			systemImage: "bookmark"
+		)
+	}
 }
 
 #Preview {
