@@ -26,8 +26,9 @@ struct SearchView: View {
 					get: { vm.searchText },
 					set: { vm.search(query: $0) }
 				),
-				prompt: "Search for new..."
+				prompt: monitor.isConnected ? "Search for news..." : "No internet connection"
 			)
+			.disabled(!monitor.isConnected)
 		}
     }
 	
@@ -67,14 +68,27 @@ struct SearchView: View {
 	
 	private var idleView: some View {
 		VStack(spacing: 16) {
-			Image(systemName: "newspaper")
-				.font(.system(size: 48))
-				.foregroundStyle(.secondary)
-			Text("Search for any topic")
-				.font(.headline)
-			Text("Climate, technology, sports, polictics...")
-				.font(.subheadline)
-				.foregroundStyle(.secondary)
+			if monitor.isConnected {
+				Image(systemName: "newspaper")
+					.font(.system(size: 48))
+					.foregroundStyle(.secondary)
+				Text("Search for any topic")
+					.font(.headline)
+				Text("Climate, technology, sports, polictics...")
+					.font(.subheadline)
+					.foregroundStyle(.secondary)
+			} else {
+				Image(systemName: "wifi.slash")
+					.font(.system(size: 48))
+					.foregroundStyle(.secondary)
+				Text("You're Offline")
+					.font(.headline)
+				Text("Connect to the internet to search for news")
+					.font(.subheadline)
+				    .foregroundStyle(.secondary)
+				    .multilineTextAlignment(.center)
+				    .padding(.horizontal, 32)
+			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}

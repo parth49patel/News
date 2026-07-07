@@ -35,18 +35,25 @@ final class HeadlinesViewModel {
 	
 	@MainActor
 	func loadHeadlines(context: ModelContext) async {
-		state = .loading
+		// Check cache FIRST regardless of connectivity
 		let cached = cache.fetch(category: selectedCategory, page: currentPage, context: context)
 		if !cached.isEmpty {
 			state = .success(cached)
+			// If online, silently refresh in background
+			if monitor.isConnected {
+				await refreshInBackground(context: context)
+			}
 			return
 		}
 		
+		// No cache - now check connectivity
 		guard monitor.isConnected else {
 			state = .failure(.noInternet)
 			return
 		}
 		
+		// Online and no cache - fetch fresh
+		state = .loading
 		do {
 			let articles = try await service.fetchHeadlines(category: selectedCategory, page: currentPage)
 			
@@ -62,6 +69,25 @@ final class HeadlinesViewModel {
 			state = .failure(.unknown(error))
 		}
 		
+	}
+	
+	
+	// Silent backround refresh - user sees cached content instantly
+	// while fresh content loads behind the scenes
+	@MainActor
+	func refreshInBackground(context: ModelContext) async {
+		guard monitor.isConnected else { return }
+		do {
+			let articles = try await service.fetchHeadlines(category: selectedCategory, page: currentPage)
+			
+			if !articles.isEmpty {
+				cache.save(articles: articles, category: selectedCategory, page: currentPage, context: context)
+				state = .success(articles)
+			}
+		} catch {
+			// Silent failure - user already sees cached content
+			// Don't change state on background refresh failure
+		}
 	}
 	
 	@MainActor
