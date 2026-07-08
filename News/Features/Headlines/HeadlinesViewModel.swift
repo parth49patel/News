@@ -16,8 +16,13 @@ final class HeadlinesViewModel {
 	private(set) var currentPage: Int = 1
 	private(set) var hasMorePages: Bool = true
 	private(set) var totalResults: Int = 0
-	
-	let categories = ["business", "science", "technology", "entertainment", "health", "sports"]
+		
+	var categories: [String] {
+		let stored = UserDefaults.standard.string(forKey: UserDefaultsKeys.preferredCategories) ?? "technology,business"
+		return stored
+			.split(separator: ",")
+			.map(String.init)
+	}
 	
 	private let monitor: NetworkMonitor
 	private let cache: CacheManager
