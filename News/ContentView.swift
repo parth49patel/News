@@ -8,7 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+	
+	@AppStorage(UserDefaultsKeys.hasCompletedOnboarding) private var hasCompletedOnboarding: Bool = false
     var body: some View {
+		if hasCompletedOnboarding {
+			mainTabView
+		} else {
+			OnboardingView()
+		}
+    }
+	
+	private var mainTabView: some View {
 		TabView {
 			Tab("Headlines", systemImage: "newspaper") {
 				HeadlinesView()
@@ -26,7 +36,7 @@ struct ContentView: View {
 				SettingsView()
 			}
 		}
-    }
+	}
 }
 
 #Preview {
