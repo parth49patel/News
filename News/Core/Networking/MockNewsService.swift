@@ -47,7 +47,7 @@ final class MockNewsService: NewsServiceProtocol {
 	func searchArticles(query: String, page: Int) async throws -> [Article] {
 		try await Task.sleep(nanoseconds: 500_000_000)
 		return Self.sampleArticles.filter {
-			$0.title.localizedCaseInsensitiveContains(query)
+			$0.title?.localizedCaseInsensitiveContains(query) ?? false
 		}
 	}
 	
@@ -55,8 +55,8 @@ final class MockNewsService: NewsServiceProtocol {
 		try await Task.sleep(nanoseconds: 300_000_000)
 		return [
 			ArticleSource(id: "bbc-news", name: "BBC News"),
-		   ArticleSource(id: "cnn", name: "CNN"),
-		   ArticleSource(id: "the-verge", name: "The Verge")
+			ArticleSource(id: "cnn", name: "CNN"),
+			ArticleSource(id: "the-verge", name: "The Verge")
 		]
 	}
 }

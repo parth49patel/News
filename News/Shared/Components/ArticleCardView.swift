@@ -12,7 +12,7 @@ struct ArticleCardView: View {
 	
 	var body: some View {
 		HStack(alignment: .top, spacing: 12) {
-			AsyncImage(url: URL(string: article.urlToImage)) { phase in
+			AsyncImage(url: URL(string: article.urlToImage ?? "")) { phase in
 				switch phase {
 					case .success(let image):
 						image
@@ -38,9 +38,14 @@ struct ArticleCardView: View {
 					.fontWeight(.semibold)
 					.foregroundStyle(.blue)
 				Spacer()
-				Text(article.publishedAt.timeAgo())
+				Text(article.publishedAt?.timeAgo() ?? "Unknown date")
 					.font(.caption)
 					.foregroundStyle(.secondary)
+					.lineLimit(2)
+			}
+				Text(article.title ?? "No Title")
+					.font(.subheadline)
+					.fontWeight(.semibold)
 					.lineLimit(2)
 				
 				if let description = article.description {
@@ -49,7 +54,6 @@ struct ArticleCardView: View {
 						.foregroundStyle(.secondary)
 						.lineLimit(2)
 				}
-			}
 		}
 		.padding(.vertical, 4)
 	}
