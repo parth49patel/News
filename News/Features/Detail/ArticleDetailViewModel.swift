@@ -44,7 +44,8 @@ class ArticleDetailViewModel {
 	}
 	
 	func openInSafari() {
-		guard let url = URL(string: article.url) else { return }
+		guard let urlString = article.url,
+				  let url = URL(string: urlString) else { return }
 		UIApplication.shared.open(url)
 	}
 }

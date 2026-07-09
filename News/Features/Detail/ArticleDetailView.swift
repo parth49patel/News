@@ -22,7 +22,7 @@ struct ArticleDetailView: View {
 	var body: some View {
 		ScrollView {
 			VStack(alignment: .leading, spacing: 16) {
-				AsyncImage(url: URL(string: article.urlToImage)) { phase in
+				AsyncImage(url: URL(string: article.urlToImage ?? "")) { phase in
 					switch phase {
 						case .success(let image):
 							image
@@ -49,12 +49,12 @@ struct ArticleDetailView: View {
 							.fontWeight(.semibold)
 							.foregroundStyle(.blue)
 						Spacer()
-						Text(article.publishedAt.timeAgo())
+						Text(article.publishedAt?.timeAgo() ?? "Unknown date")
 							.font(.caption)
 							.foregroundStyle(.secondary)
 					}
 					
-					Text(article.title)
+					Text(article.title ?? "No Title")
 						.font(.title3)
 						.fontWeight(.bold)
 					

@@ -10,11 +10,11 @@ import SwiftData
 
 @Model
 class CachedArticle {
-	var title: String
+	var title: String?
 	var arcticleDescription: String?
-	var url: String
+	var url: String?
 	var urlToImage: String?
-	var publishedAt: String
+	var publishedAt: String?
 	var content: String?
 	var sourceName: String
 	var sourceId: String?

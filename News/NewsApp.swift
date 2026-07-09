@@ -17,7 +17,7 @@ struct NewsApp: App {
         WindowGroup {
             ContentView()
 				.environment(networkMonitor)
+				.modelContainer(for: [CachedArticle.self, BookmarkedArticle.self])
         }
-		.modelContainer(for: [CachedArticle.self, BookmarkedArticle.self])
     }
 }
