@@ -47,6 +47,11 @@
 		51D47D4D2FF352CE006D8E01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D492FF352CE006D8E01 /* ContentView.swift */; };
 		51D47D4E2FF352CE006D8E01 /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D4A2FF352CE006D8E01 /* NewsApp.swift */; };
 		51D47D542FF36615006D8E01 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D47D532FF36612006D8E01 /* Config.swift */; };
+		51F61CDA300084F300FDDFDB /* NewsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F61CD7300084F300FDDFDB /* NewsWidget.swift */; };
+		51F61CDB300084F300FDDFDB /* NewsWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F61CD8300084F300FDDFDB /* NewsWidgetBundle.swift */; };
+		51F61CDC300084F300FDDFDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F61CD5300084F300FDDFDB /* Assets.xcassets */; };
+		51F61CDF300085DF00FDDFDB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F61CDE300085DF00FDDFDB /* ImageCache.swift */; };
+		51F61CE1300085F500FDDFDB /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F61CE0300085F500FDDFDB /* CachedImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,28 +120,13 @@
 		51D47D4A2FF352CE006D8E01 /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
 		51D47D532FF36612006D8E01 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		51D47D552FF3661A006D8E01 /* Config.example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.example.swift; sourceTree = "<group>"; };
+		51F61CD5300084F300FDDFDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51F61CD6300084F300FDDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51F61CD7300084F300FDDFDB /* NewsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWidget.swift; sourceTree = "<group>"; };
+		51F61CD8300084F300FDDFDB /* NewsWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsWidgetBundle.swift; sourceTree = "<group>"; };
+		51F61CDE300085DF00FDDFDB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		51F61CE0300085F500FDDFDB /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		51365F902FFF26FF0036F341 /* Exceptions for "NewsWidget" folder in "NewsWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 51365F7B2FFF26FE0036F341 /* NewsWidgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		51365F822FFF26FE0036F341 /* NewsWidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				51365F902FFF26FF0036F341 /* Exceptions for "NewsWidget" folder in "NewsWidgetExtension" target */,
-			);
-			path = NewsWidget;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		51365F792FFF26FE0036F341 /* Frameworks */ = {
@@ -184,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				515207DF2FF748B500F960FB /* CacheManager.swift */,
+				51F61CDE300085DF00FDDFDB /* ImageCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -203,6 +194,7 @@
 				515207EE2FF9E40300F960FB /* ErrorView.swift */,
 				515207F02FF9E47500F960FB /* EmptyStateView.swift */,
 				515207F22FF9E71C00F960FB /* ArticleCardView.swift */,
+				51F61CE0300085F500FDDFDB /* CachedImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -274,7 +266,7 @@
 			children = (
 				51365F9430006CB60036F341 /* NewsWidgetExtension.entitlements */,
 				51D47D4B2FF352CE006D8E01 /* News */,
-				51365F822FFF26FE0036F341 /* NewsWidget */,
+				51F61CD9300084F300FDDFDB /* NewsWidget */,
 				51365F7D2FFF26FE0036F341 /* Frameworks */,
 				51D47D392FF34C1A006D8E01 /* Products */,
 			);
@@ -350,6 +342,17 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		51F61CD9300084F300FDDFDB /* NewsWidget */ = {
+			isa = PBXGroup;
+			children = (
+				51F61CD5300084F300FDDFDB /* Assets.xcassets */,
+				51F61CD6300084F300FDDFDB /* Info.plist */,
+				51F61CD7300084F300FDDFDB /* NewsWidget.swift */,
+				51F61CD8300084F300FDDFDB /* NewsWidgetBundle.swift */,
+			);
+			path = NewsWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,9 +367,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				51365F822FFF26FE0036F341 /* NewsWidget */,
 			);
 			name = NewsWidgetExtension;
 			packageProductDependencies = (
@@ -439,6 +439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F61CDC300084F300FDDFDB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +458,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F61CDA300084F300FDDFDB /* NewsWidget.swift in Sources */,
+				51F61CDB300084F300FDDFDB /* NewsWidgetBundle.swift in Sources */,
 				51365F9630006F270036F341 /* NewsResponse.swift in Sources */,
 				51365F9530006EDF0036F341 /* Config.swift in Sources */,
 				51365F922FFF27150036F341 /* Article.swift in Sources */,
@@ -469,6 +472,7 @@
 			files = (
 				5127C7972FF49B9400D1E662 /* Endpoint.swift in Sources */,
 				5127C79F2FF4A12500D1E662 /* MockNewsService.swift in Sources */,
+				51F61CDF300085DF00FDDFDB /* ImageCache.swift in Sources */,
 				515207FD2FFAD17100F960FB /* ArticleDetailViewModel.swift in Sources */,
 				515207F12FF9E47500F960FB /* EmptyStateView.swift in Sources */,
 				515207E82FF9CEF600F960FB /* ViewState.swift in Sources */,
@@ -488,6 +492,7 @@
 				5127C7952FF49B2200D1E662 /* NewsResponse.swift in Sources */,
 				515207E22FF74DE300F960FB /* CachedArticle.swift in Sources */,
 				515207EA2FF9DDE600F960FB /* LoadingState.swift in Sources */,
+				51F61CE1300085F500FDDFDB /* CachedImageView.swift in Sources */,
 				5152081A2FFDBBB300F960FB /* OnboardingView.swift in Sources */,
 				515208042FFC6FDB00F960FB /* SearchViewModel.swift in Sources */,
 				515208062FFC6FEB00F960FB /* SearchView.swift in Sources */,

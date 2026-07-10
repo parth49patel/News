@@ -51,6 +51,7 @@ struct SettingsView: View {
 					}
 					Button(role: .destructive) {
 						CacheManager.shared.clearAll(context: context)
+						ImageCache.shared.clearAll()
 						cacheSize = 0
 					} label: {
 						Label("Clear Cache", systemImage: "trash")
