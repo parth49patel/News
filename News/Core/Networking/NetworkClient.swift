@@ -14,8 +14,9 @@ final class NetworkClient {
 	
 	@AppStorage(UserDefaultsKeys.dailyRequestCount) private var dailyRequestCount: Int = 0
 	@AppStorage(UserDefaultsKeys.lastRequestDate) private var lastRequestDate: String = ""
-
-	func trackRequest() {
+	private let maxRetries: Int = 3
+	
+	private func trackRequest() {
 		let today = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none)
 		if today != lastRequestDate {
 			dailyRequestCount = 0
@@ -29,28 +30,42 @@ final class NetworkClient {
 			throw NewsError.invalidURL
 		}
 		
-		trackRequest()
+		var attempt = 0
 		
-		let(data, response) = try await URLSession.shared.data(from: url)
-		
-		guard let httpResponse = response as? HTTPURLResponse else {
-			throw NewsError.unknown(URLError(.badServerResponse))
+		while true {
+			do {
+				let(data, response) = try await URLSession.shared.data(from: url)
+				
+				guard let httpResponse = response as? HTTPURLResponse else {
+					throw NewsError.unknown(URLError(.badServerResponse))
+				}
+				
+				switch httpResponse.statusCode {
+					case 200:
+						trackRequest()
+						return try JSONDecoder().decode(T.self, from: data)
+					case 429:
+						throw NewsError.rateLimitExceeded
+					default:
+						throw NewsError.serverError(statusCode: httpResponse.statusCode)
+				}
+			} catch {
+				attempt += 1
+				guard attempt < maxRetries && isRetryable(error) else { throw error}
+				let delay = UInt64(pow(2.0, Double(attempt - 1)) * 1_000_000_000)
+				try await Task.sleep(nanoseconds: delay)
+			}
 		}
-		
-		switch httpResponse.statusCode {
-			case 200:
-				break
-			case 429:
-				throw NewsError.rateLimitExceeded
-			default:
-				throw NewsError.serverError(statusCode: httpResponse.statusCode)
+	}
+	
+	private func isRetryable(_ error: Error) -> Bool {
+		if let urlError = error as? URLError {
+			switch urlError.code {
+				case .notConnectedToInternet, .networkConnectionLost, .timedOut, .cannotConnectToHost, .dnsLookupFailed: return true
+				default: return false
+			}
 		}
-		
-		do {
-			let decoded = try JSONDecoder().decode(T.self, from: data)
-			return decoded
-		} catch {
-			throw NewsError.decodingFailed
-		}
+		if case NewsError.serverError = error { return true }
+		return false
 	}
 }
