@@ -49,6 +49,7 @@ struct BookmarksView: View {
 					} label: {
 						Label("Delete", systemImage: "trash")
 					}
+					.accessibilityLabel("Delete bookmark")
 				}
 			}
 		}

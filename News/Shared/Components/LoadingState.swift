@@ -21,5 +21,7 @@ struct LoadingState: View {
 				.foregroundStyle(.secondary)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.accessibilityLabel(message)
+		.accessibilityAddTraits(.updatesFrequently)
 	}
 }

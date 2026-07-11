@@ -101,6 +101,8 @@ struct HeadlinesView: View {
 							)
 							.clipShape(Capsule())
 					}
+					.accessibilityLabel("\(category.capitalized) category")
+					.accessibilityAddTraits(vm.selectedCategory == category ? .isSelected : [])
 				}
 			}
 			.padding(.horizontal)
@@ -118,6 +120,8 @@ struct HeadlinesView: View {
 		.padding(.vertical, 8)
 		.frame(maxWidth: .infinity)
 		.background(Color.orange)
+		.accessibilityLabel("You're offline. Showing cached content.")
+		.accessibilityAddTraits(.isStaticText)
 	}
 	
 }

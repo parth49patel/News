@@ -29,6 +29,7 @@ struct SearchView: View {
 				prompt: monitor.isConnected ? "Search for news..." : "No internet connection"
 			)
 			.disabled(!monitor.isConnected)
+			.accessibilityHint(monitor.isConnected ? "" : "Search is unavailable while offline.")
 		}
     }
 	
