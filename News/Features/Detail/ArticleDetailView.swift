@@ -95,6 +95,7 @@ struct ArticleDetailView: View {
 					Image(systemName: vm.isBookmarked ? "bookmark.fill" : "bookmark")
 						.foregroundStyle(vm.isBookmarked ? .blue : .primary)
 				}
+				.accessibilityLabel(vm.isBookmarked ? "Remove bookmark" : "Add bookmark")
 			}
 		}
 		.task {

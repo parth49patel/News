@@ -42,6 +42,8 @@ struct ArticleCardView: View {
 			}
 			.padding(.vertical, 4)
 		}
+		.accessibilityLabel(accessibiltyDescription)
+		.accessibilityElement(children: .combine)
 	}
 	
 	private var placeHolderImage: some View {
@@ -51,5 +53,14 @@ struct ArticleCardView: View {
 				Image(systemName: "newspaper")
 					.foregroundStyle(.secondary)
 			}
+	}
+	
+	private var accessibiltyDescription: String {
+		var parts: [String] = []
+		if let title = article.title { parts.append(title) }
+		parts.append(article.source.name)
+		if let time = article.publishedAt?.timeAgo() { parts.append(time) }
+		if let description = article.description { parts.append(description) }
+		return parts.joined(separator: ". ")
 	}
 }
