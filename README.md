@@ -14,7 +14,7 @@ An iOS news reader built with SwiftUI, demonstrating protocol-oriented networkin
 
 | Bookmarks | Settings | Widget |
 |-----------|----------|--------|
-| ![Bookmarks](screenshots/Bookmarks.png) | ![Settings](Screenshots/Settings.png) | ![Widget](Screenshots/Widget.png) |
+| ![Bookmarks](Screenshots/Bookmarks.png) | ![Settings](Screenshots/Settings.png) | ![Widget](Screenshots/Widget.png) |
 
 ---
 
@@ -37,6 +37,28 @@ NewsFlow is an iOS app that delivers personalised top headlines across multiple 
 
 NewsFlow follows **MVVM** with a clean separation between networking, caching, and presentation layers. Organised using a feature-based folder structure.
 Every ViewModel receives a `NewsServiceProtocol` via dependency injection — enabling development and testing against `MockNewsService` without real API calls.
+
+### Key Architectural Decisions
+
+**Protocol-Oriented Service Layer**
+`NewsServiceProtocol` defines the contract for all data fetching. `LiveNewsService` conforms for production and `MockNewsService` conforms for development — ViewModels never know which one they're talking to. This enabled all UI development without consuming real API quota.
+
+**Generic ViewState Enum**
+Rather than managing multiple boolean flags (`isLoading`, `hasError`, `isEmpty`), every ViewModel uses a single generic `ViewState<T>` enum with cases for `idle`, `loading`, `success`, `empty`, and `failure`. Only one state is ever possible at a time — the compiler enforces it.
+
+**Dependency Injection Throughout**
+Every ViewModel receives its dependencies via initialiser with production defaults:
+```swift
+init(
+    service: NewsServiceProtocol = LiveNewsService(),
+    cache: CacheManager = .shared,
+    monitor: NetworkMonitor = .shared
+)
+```
+This makes every ViewModel fully testable by injecting mocks without modifying production code.
+
+**SwiftData for Persistence**
+Two separate SwiftData models — `CachedArticle` for time-limited API response caching and `BookmarkedArticle` for permanent user saves. Keeping them separate means cache clearance never affects bookmarks.
 
 ---
 
